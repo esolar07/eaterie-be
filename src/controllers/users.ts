@@ -1,5 +1,5 @@
 import prisma from "../db";
-import {createJwt, hashPassword, verifyPassword} from "../modules/auth";
+import {createJwt, hashPassword} from "../modules/auth";
 
 export const registerNewUser = async (req, res) => {
     try {
@@ -12,6 +12,6 @@ export const registerNewUser = async (req, res) => {
         const userToken = createJwt(user)
         await res.json({userToken})
     } catch ($e) {
-        res.json('Error')
+        res.json($e)
     }
 }
