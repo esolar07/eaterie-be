@@ -23,21 +23,17 @@ CREATE TABLE "Post" (
 -- CreateTable
 CREATE TABLE "RestaurantUser" (
     "id" SERIAL NOT NULL,
-    "contactEmail" TEXT NOT NULL,
     "contactPhone" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "image" TEXT,
     "contactName" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
     "restaurantName" TEXT NOT NULL,
     "restaurantAddress" TEXT NOT NULL,
     "restaurantPhone" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
 
     CONSTRAINT "RestaurantUser_pkey" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "RestaurantUser_contactEmail_key" ON "RestaurantUser"("contactEmail");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "RestaurantUser_contactPhone_key" ON "RestaurantUser"("contactPhone");
@@ -47,3 +43,6 @@ CREATE UNIQUE INDEX "RestaurantUser_restaurantPhone_key" ON "RestaurantUser"("re
 
 -- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "RestaurantUser" ADD CONSTRAINT "RestaurantUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
