@@ -25,3 +25,16 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
 }
+
+model RestaurantUser {
+  id            Int      @id @default(autoincrement())
+  contactEmail  String   @unique
+  contactPhone  String   @unique
+  address       String
+  image         String?
+  contactName   String
+  password      String
+  restaurantName  String
+  restaurantAddress String
+  restaurantPhone   String   @unique
+}
