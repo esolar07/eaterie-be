@@ -1,6 +1,5 @@
 import prisma from "../db";
-import { createJwt, hashPassword } from "../modules/auth";
-import { createUser } from "./users";
+import { hashPassword } from "../modules/auth";
 
 export const createRestaurant = async (req, res) => {
   try {
@@ -34,7 +33,6 @@ export const createRestaurant = async (req, res) => {
     })
     res.json({ message: 'Restaurant user profile created successfully', restaurant });
   } catch (error) {
-    console.log(error)
     if (error.code === 'P2002') {
       res.status(400).json({ error: 'Unique field violation. Contact email, contact phone, or restaurant phone already exists' });
     } else {
