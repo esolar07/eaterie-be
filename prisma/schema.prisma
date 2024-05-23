@@ -11,17 +11,31 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  email    String @unique
-  password String
-  Post     Post[]
+  id             String           @id @default(uuid())
+  email          String           @unique
+  password       String
+  Post           Post[]
+  RestaurantUser RestaurantUser[]
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
-  published Boolean @default(true)
-  postTitle String  @db.VarChar(3000)
+  id        Int      @id @default(autoincrement())
+  published Boolean  @default(true)
+  postTitle String   @db.VarChar(3000)
   authorId  String
   author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
+}
+
+model RestaurantUser {
+  id                Int     @id @default(autoincrement())
+  contactPhone      String  @unique
+  address           String
+  image             String?
+  contactName       String
+  restaurantName    String
+  restaurantAddress String
+  restaurantPhone   String  @unique
+  userId            String
+  User              User    @relation(fields: [userId], references: [id])
 }
