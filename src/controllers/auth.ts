@@ -9,9 +9,10 @@ export const authenticate = async (req, res) => {
         email: email
       }
     });
-
-    if (!user || !verifyPassword(password, user.password)) {
-      return res.status(401).json({ error: 'Invalid email or password' });
+    
+    const isPass = await verifyPassword(password, user.password);
+    if (!user || !isPass) {
+        return res.status(401).json({ error: 'Invalid email or password' });
     }
 
     const userToken = createJwt(user);
@@ -20,4 +21,7 @@ export const authenticate = async (req, res) => {
     console.log(error)
     res.status(500).json({ error: 'An error occurred while authenticating the user' });
   }
+
+
+
 };
