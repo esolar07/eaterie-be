@@ -13,7 +13,7 @@ ADD COLUMN     "password" TEXT NOT NULL;
 CREATE TABLE "Post" (
     "id" SERIAL NOT NULL,
     "published" BOOLEAN NOT NULL DEFAULT true,
-    "postTitle" VARCHAR(3000) NOT NULL,
+    "postTitle" VARCHAR(200) NOT NULL,
     "authorId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

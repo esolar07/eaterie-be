@@ -5,7 +5,7 @@ export const createPost = async (req, res) => {
     try {
         const post = await prisma.post.create({
             data: {
-                postTitle: req.body.postTitle,
+                postTitle:req.body.postTitle,
             }
         })
         await res.json({})
