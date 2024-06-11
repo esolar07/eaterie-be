@@ -39,3 +39,4 @@ model RestaurantUser {
   userId            String
   User              User    @relation(fields: [userId], references: [id])
 }
+
