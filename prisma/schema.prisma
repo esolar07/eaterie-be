@@ -14,8 +14,10 @@ model User {
   id             String           @id @default(uuid())
   email          String           @unique
   password       String
+  isBusiness     Boolean          @default(false)
   Post           Post[]
   RestaurantUser RestaurantUser[]
+  UserProfile    UserProfile?
 }
 
 model Post {
@@ -28,14 +30,33 @@ model Post {
 }
 
 model RestaurantUser {
-  id                Int     @id @default(autoincrement())
-  contactPhone      String  @unique
-  address           String
-  image             String?
-  contactName       String
-  restaurantName    String
-  restaurantAddress String
-  restaurantPhone   String  @unique
+  id                Int     @id
   userId            String
   User              User    @relation(fields: [userId], references: [id])
+  restaurantId      Int
+  Restaurant        Restaurant @relation(fields: [restaurantId], references: [id])
+}
+
+model UserProfile {
+  id                Int     @id @default(autoincrement())
+  firstName         String  
+  lastName          String
+  image             String?
+  phone             String
+  gender            String
+  userId            String   @unique
+  User              User?    @relation(fields: [userId], references: [id])
+}
+
+model Restaurant {
+  id                Int     @id @default(autoincrement())
+  name              String
+  company_address   String
+  city              String
+  state             String
+  zip               String
+  phone             String  @unique
+  industry          String
+  image             String?
+  RestaurantUser    RestaurantUser[]
 }

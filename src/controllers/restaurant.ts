@@ -2,35 +2,40 @@ import prisma from "../db";
 import { hashPassword } from "../modules/auth";
 
 export const createRestaurant = async (req, res) => {
+  console.log(req)
   try {
     const {
-      contactPhone,
-      address,
+      phone,
+      company_address,
       image,
-      contactName,
-      restaurantName,
-      restaurantAddress,
-      restaurantPhone,
-      password,
-      contactEmail
+      name,
+      city,
+      state,
+      zip,
+      industry,
+      userId
     } = req.body;
 
-
-    const restaurant = await prisma.restaurantUser.create({
+    const restaurant = await prisma.restaurant.create({
       data: {
-        contactPhone,
-        address,
+        phone,
+        company_address,
         image,
-        contactName,
-        restaurantName,
-        restaurantAddress,
-        restaurantPhone,
-        User: { create: {
-                email: contactEmail,
-                password: await hashPassword(password)
-        }}
+        name,
+        city,
+        state,
+        zip,
+        industry
       }
-    })
+    });
+
+    // Pendiente de ordenar
+    // const restaurantUser = await prisma.restaurantUser.create({
+    //   data: {
+    //     restaurantId: restaurant.id,
+    //     userId: userId || 1
+    //   }
+    // });
     res.json({ message: 'Restaurant user profile created successfully', restaurant });
   } catch (error) {
     if (error.code === 'P2002') {
