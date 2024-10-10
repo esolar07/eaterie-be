@@ -20,7 +20,6 @@ cloudinary.config({
 });
 
 app.get('/', (req, res) => {
-    console.log('hello0000s')
     res.status(200)
     res.json({message: 'hello'})
 })
