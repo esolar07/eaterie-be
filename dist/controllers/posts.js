@@ -35,35 +35,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createPost = void 0;
-var db_1 = __importDefault(require("../db"));
 var createPost = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var post, $e_1;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, db_1.default.post.create({
-                        data: {
-                            postTitle: req.body.postTitle,
-                        }
-                    })];
-            case 1:
-                post = _a.sent();
-                return [4 /*yield*/, res.json({})];
-            case 2:
-                _a.sent();
-                return [3 /*break*/, 4];
-            case 3:
-                $e_1 = _a.sent();
-                res.json($e_1);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
+        return [2 /*return*/];
     });
 }); };
 exports.createPost = createPost;

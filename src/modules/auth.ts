@@ -14,7 +14,7 @@ export const createJwt  = (user: { id: any; email: string; password?: string; })
 }
 
 export const verifyToken = (req, res, next) => {
-    const bearerToken = req.headers.auth;
+    const bearerToken = req.headers.authorization;
     if (!bearerToken) {
         res.status = 401;
         res.json({message: "Not authenticated."})
@@ -22,12 +22,12 @@ export const verifyToken = (req, res, next) => {
     }
     const [bearer, token] = bearerToken.split(" ");
     try {
-        const user = jwt.verify(bearerToken, process.env.JWT_SECRET);
+        const user = jwt.verify(token, process.env.JWT_SECRET);
         req.user = user;
         next();
     } catch (e) {
         res.status = 401;
-        res.json({message: "Not authenticated."})
+        res.json({message: "Error: Not authenticated."})
         return;
     }
 }

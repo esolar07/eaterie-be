@@ -36,13 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.createAssetFolders = exports.uploadImage = void 0;
 var cloudinary_1 = require("cloudinary");
-var uploadImage = function (imagePath) { return __awaiter(void 0, void 0, void 0, function () {
-    var options, result, error_1;
+var uploadImage = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var options, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 options = {
+                    public_id: "abc test image",
+                    folder: "restaurant/abc",
                     use_filename: true,
                     unique_filename: false,
                     overwrite: true,
@@ -50,11 +53,13 @@ var uploadImage = function (imagePath) { return __awaiter(void 0, void 0, void 0
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, cloudinary_1.v2.uploader.upload(imagePath, options)];
+                return [4 /*yield*/, cloudinary_1.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg", options)
+                        .then(function (result) {
+                        return res.json({ message: 'Restaurant asset uploaded successfully', data: result });
+                    })];
             case 2:
-                result = _a.sent();
-                console.log(result);
-                return [2 /*return*/, result.public_id];
+                _a.sent();
+                return [3 /*break*/, 4];
             case 3:
                 error_1 = _a.sent();
                 console.error(error_1);
@@ -63,4 +68,27 @@ var uploadImage = function (imagePath) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); };
+exports.uploadImage = uploadImage;
+var createAssetFolders = function (res) { return __awaiter(void 0, void 0, void 0, function () {
+    var error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, cloudinary_1.v2.api.create_folder("restaurant/test")
+                        .then(function (result) {
+                        return res.json({ message: 'Restaurant asset uploaded successfully', data: result });
+                    })];
+            case 1:
+                _a.sent();
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                console.error(error_2);
+                return [2 /*return*/];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.createAssetFolders = createAssetFolders;
 //# sourceMappingURL=assets.js.map

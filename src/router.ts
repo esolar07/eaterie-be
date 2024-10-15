@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { registerNewUser, signIn } from "./controllers/users";
-// import { createRestaurant } from "./controllers/restaurant"
+import { createRestaurant } from "./controllers/restaurant"
 import {uploadImage, createAssetFolders} from "./controllers/assets";
 import { verifyToken } from "./modules/auth";
 
@@ -12,7 +12,7 @@ router.post('/register', registerNewUser);
 router.get('/user')
 router.post('/register/restaurant', verifyToken, createRestaurant);
 router.post('/authenticate', signIn);
-router.post('/assets/upload', uploadImage)
-router.post('/assets/folder/create', verifyToken, createAssetFolders)
+router.post('/post', uploadImage)
+router.get('/post')
 
 export default router

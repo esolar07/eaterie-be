@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerNewUser = void 0;
+exports.signIn = exports.registerNewUser = void 0;
 var db_1 = __importDefault(require("../db"));
 var auth_1 = require("../modules/auth");
 var registerNewUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -74,4 +74,37 @@ var registerNewUser = function (req, res) { return __awaiter(void 0, void 0, voi
     });
 }); };
 exports.registerNewUser = registerNewUser;
+var signIn = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, isPasswordValid, userToken, e_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                return [4 /*yield*/, db_1.default.user.findUnique({
+                        where: {
+                            email: req.body.email
+                        }
+                    })];
+            case 1:
+                user = _a.sent();
+                return [4 /*yield*/, (0, auth_1.verifyPassword)(req.body.password, user.password)];
+            case 2:
+                isPasswordValid = _a.sent();
+                if (!isPasswordValid) {
+                    res.status(401);
+                    res.json({ message: "Incorrect email or password" });
+                }
+                userToken = (0, auth_1.createJwt)(user);
+                res.json({ message: userToken });
+                return [3 /*break*/, 4];
+            case 3:
+                e_1 = _a.sent();
+                res.status(400);
+                res.json({ message: e_1 });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.signIn = signIn;
 //# sourceMappingURL=users.js.map

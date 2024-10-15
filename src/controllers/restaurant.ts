@@ -1,17 +1,18 @@
 import prisma from "../db";
+import {createAssetFolders} from "./assets";
 
 export const createRestaurant = async (req, res) => {
   try {
-    const { image, restaurantName, restaurantAddress } = req.body;
+    const { restaurantName, restaurantAddress } = req.body;
     const userId = req.header;
     const restaurant = await prisma.restaurant.create({
       data: {
-          image,
           restaurantName,
           restaurantAddress,
-          userId
+          userId: req.user.id
       }
     })
+    let assetFolderResult = await createAssetFolders(restaurant.restaurantName);
     res.json({ message: 'Restaurant successfully created', restaurant });
   } catch (e) {
     if (e.code === 'P2002') {

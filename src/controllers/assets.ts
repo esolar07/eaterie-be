@@ -19,13 +19,14 @@ export const uploadImage = async (req, res) => {
     }
 };
 
-export const createAssetFolders = async (req, res) => {
+export const createAssetFolders = async (folderName: string) => {
     try {
-        await cloudinary.api.create_folder("restaurant/abc")
+        await cloudinary.api.create_folder(`restaurant/${folderName}`)
             .then((result) => {
-                return res.json({ message: 'Restaurant asset folder created successfully', result});
+                return result;
             });
     } catch (error) {
         console.error(error);
+        return;
     }
 }

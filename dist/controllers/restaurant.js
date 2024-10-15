@@ -41,49 +41,36 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createRestaurant = void 0;
 var db_1 = __importDefault(require("../db"));
-var auth_1 = require("../modules/auth");
 var createRestaurant = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, contactPhone, address, image, contactName, restaurantName, restaurantAddress, restaurantPhone, password, contactEmail, restaurant, _b, _c, error_1;
-    var _d, _e, _f, _g;
-    return __generator(this, function (_h) {
-        switch (_h.label) {
+    var _a, image, restaurantName, restaurantAddress, userId, restaurant, e_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _h.trys.push([0, 3, , 4]);
-                _a = req.body, contactPhone = _a.contactPhone, address = _a.address, image = _a.image, contactName = _a.contactName, restaurantName = _a.restaurantName, restaurantAddress = _a.restaurantAddress, restaurantPhone = _a.restaurantPhone, password = _a.password, contactEmail = _a.contactEmail;
-                _c = (_b = db_1.default.restaurantUser).create;
-                _d = {};
-                _e = {
-                    contactPhone: contactPhone,
-                    address: address,
-                    image: image,
-                    contactName: contactName,
-                    restaurantName: restaurantName,
-                    restaurantAddress: restaurantAddress,
-                    restaurantPhone: restaurantPhone
-                };
-                _f = {};
-                _g = {
-                    email: contactEmail
-                };
-                return [4 /*yield*/, (0, auth_1.hashPassword)(password)];
-            case 1: return [4 /*yield*/, _c.apply(_b, [(_d.data = (_e.User = (_f.create = (_g.password = _h.sent(),
-                        _g), _f),
-                        _e),
-                        _d)])];
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, image = _a.image, restaurantName = _a.restaurantName, restaurantAddress = _a.restaurantAddress;
+                userId = req.header;
+                return [4 /*yield*/, db_1.default.restaurant.create({
+                        data: {
+                            image: image,
+                            restaurantName: restaurantName,
+                            restaurantAddress: restaurantAddress,
+                            userId: userId
+                        }
+                    })];
+            case 1:
+                restaurant = _b.sent();
+                res.json({ message: 'Restaurant successfully created', restaurant: restaurant });
+                return [3 /*break*/, 3];
             case 2:
-                restaurant = _h.sent();
-                res.json({ message: 'Restaurant user profile created successfully', restaurant: restaurant });
-                return [3 /*break*/, 4];
-            case 3:
-                error_1 = _h.sent();
-                if (error_1.code === 'P2002') {
-                    res.status(400).json({ error: 'Unique field violation. Contact email, contact phone, or restaurant phone already exists' });
+                e_1 = _b.sent();
+                if (e_1.code === 'P2002') {
+                    res.status(400).json({ error: 'Unique field violation. Restaurant name already exists' });
                 }
                 else {
-                    res.status(500).json({ error: 'An error occurred while creating the profile' });
+                    res.status(500).json({ error: 'An error occurred while creating the restaurant' });
                 }
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

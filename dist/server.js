@@ -16,10 +16,12 @@ app.use((0, morgan_1.default)('dev'));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 cloudinary.config({
-    secure: true
+    secure: true,
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 app.get('/', function (req, res) {
-    console.log('hello0000s');
     res.status(200);
     res.json({ message: 'hello' });
 });
