@@ -21,7 +21,7 @@ model Post {
   id           Int        @id @default(autoincrement())
   published    Boolean    @default(true)
   postTitle    String     @db.VarChar(255)
-  postImage String @db.VarChar(255)
+  postImage    String     @db.VarChar(255)
   restaurantId Int
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   status  Boolean @default(true)

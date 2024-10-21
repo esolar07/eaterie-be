@@ -4,7 +4,7 @@ import {createAssetFolders} from "./assets";
 export const createRestaurant = async (req, res) => {
   try {
     const { restaurantName, restaurantAddress } = req.body;
-    const userId = req.header;
+    const userId = req.headers;
     const restaurant = await prisma.restaurant.create({
       data: {
           restaurantName,
