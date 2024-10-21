@@ -1,5 +1,4 @@
 import prisma from "../db";
-import {createJwt, hashPassword} from "../modules/auth";
 
 export const createPost = async (req, res) => {
     const { postTitle, postImage } = req.body;
@@ -8,17 +7,28 @@ export const createPost = async (req, res) => {
             userId: req.user.id
         }
     })
-
     try {
         const post = await prisma.post.create({
             data: {
                 postTitle,
-                postImage,
-
+                restaurantId: 1,
             }
         })
         await res.json({})
     } catch ($e) {
         res.json($e)
+    }
+}
+
+export const getPosts = async (req, res) => {
+    try {
+        const posts = await prisma.post.findMany({
+            where: {
+                status: true
+            }
+        });
+        res.json(posts)
+    } catch (e) {
+        res.json(e);
     }
 }
