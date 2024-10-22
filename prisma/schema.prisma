@@ -19,19 +19,18 @@ model User {
 
 model Post {
   id           Int        @id @default(autoincrement())
-  published    Boolean    @default(true)
-  postTitle    String     @db.VarChar(255)
-  postImage    String     @db.VarChar(255)
-  restaurantId Int
+  title    String     @db.VarChar(255)
+  image    String     @db.VarChar(255)
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
-  status       Boolean @default(true)
+  restaurantId Int
+  published    Boolean    @default(true)
   createdAt    DateTime   @default(now())
 }
 
 model Restaurant {
   id                Int     @id @default(autoincrement())
-  restaurantName    String  @db.VarChar(255)
-  restaurantAddress String  @db.VarChar(255)
+  r_name    String  @db.VarChar(255)
+  r_address String  @db.VarChar(255)
   image             String?
   userId            String
   user              User    @relation(fields: [userId], references: [id])

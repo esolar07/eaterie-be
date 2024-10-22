@@ -10,10 +10,10 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Post" (
     "id" SERIAL NOT NULL,
-    "published" BOOLEAN NOT NULL DEFAULT true,
-    "postTitle" VARCHAR(255) NOT NULL,
+    "title" VARCHAR(255) NOT NULL,
+    "image" VARCHAR(255) NOT NULL,
     "restaurantId" INTEGER NOT NULL,
-    "status" BOOLEAN NOT NULL DEFAULT true,
+    "published" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
@@ -22,8 +22,8 @@ CREATE TABLE "Post" (
 -- CreateTable
 CREATE TABLE "Restaurant" (
     "id" SERIAL NOT NULL,
-    "restaurantName" VARCHAR(255) NOT NULL,
-    "restaurantAddress" VARCHAR(255) NOT NULL,
+    "name" VARCHAR(255) NOT NULL,
+    "address" VARCHAR(255) NOT NULL,
     "image" TEXT,
     "userId" TEXT NOT NULL,
 

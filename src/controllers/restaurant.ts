@@ -7,12 +7,12 @@ export const createRestaurant = async (req, res) => {
     const userId = req.headers;
     const restaurant = await prisma.restaurant.create({
       data: {
-          restaurantName,
-          restaurantAddress,
-          userId: req.user.id
+        r_name: restaurantName,
+        r_address: restaurantAddress,
+        userId: "2e6e8553-f968-4371-afcd-14c5273a573a"
       }
     })
-    let assetFolderResult = await createAssetFolders(restaurant.restaurantName);
+    let assetFolderResult = await createAssetFolders(restaurantName);
     res.json({ message: 'Restaurant successfully created', restaurant });
   } catch (e) {
     if (e.code === 'P2002') {

@@ -10,11 +10,12 @@ export const createPost = async (req, res) => {
     try {
         const post = await prisma.post.create({
             data: {
-                postTitle,
-                restaurantId: 1,
+                title: postTitle,
+                image: postImage,
+                restaurantId: restaurant.id
             }
         })
-        await res.json({})
+        await res.json(post)
     } catch ($e) {
         res.json($e)
     }
@@ -24,7 +25,7 @@ export const getPosts = async (req, res) => {
     try {
         const posts = await prisma.post.findMany({
             where: {
-                status: true
+                published: true
             }
         });
         res.json(posts)
