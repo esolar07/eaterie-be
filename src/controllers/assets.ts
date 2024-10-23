@@ -1,7 +1,7 @@
 import {v2 as cloudinary} from 'cloudinary';
 
 
-export const uploadImage = async (req, res) => {
+export const uploadImageInAssetFolder = async () => {
     const options = {
         public_id: "abc test image",
         folder: "restaurant/abc",
@@ -12,7 +12,7 @@ export const uploadImage = async (req, res) => {
     try {
         await cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg", options)
             .then((result) => {
-                return res.json({ message: 'Restaurant asset uploaded successfully', data: result});
+                return  result;
             });
     } catch (error) {
         console.error(error);
@@ -21,7 +21,7 @@ export const uploadImage = async (req, res) => {
 
 export const createAssetFolders = async (folderName: string) => {
     try {
-        await cloudinary.api.create_folder(`restaurant/${folderName}`)
+        await cloudinary.api.create_folder(`restaurant/${folderName}/assets`)
             .then((result) => {
                 return result;
             });

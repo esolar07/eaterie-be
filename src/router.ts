@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { registerNewUser, signIn } from "./controllers/users";
 import { createRestaurant } from "./controllers/restaurant"
-import {uploadImage, createAssetFolders} from "./controllers/assets";
 import { verifyToken } from "./modules/auth";
 import {createPost, getPosts} from "./controllers/posts";
 

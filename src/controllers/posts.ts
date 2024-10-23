@@ -1,4 +1,5 @@
 import prisma from "../db";
+import {uploadImageInAssetFolder} from "./assets";
 
 export const createPost = async (req, res) => {
     const { postTitle, postImage } = req.body;
@@ -15,10 +16,14 @@ export const createPost = async (req, res) => {
                 restaurantId: restaurant.id
             }
         })
-        await res.json(post)
+        res.json(post)
     } catch ($e) {
         res.json($e)
     }
+}
+
+export const storeImageInCloudinary = async () => {
+
 }
 
 export const getPosts = async (req, res) => {

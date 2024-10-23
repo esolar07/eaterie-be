@@ -13,7 +13,7 @@ export const createRestaurant = async (req, res) => {
       }
     })
     let assetFolderResult = await createAssetFolders(restaurantName);
-    res.json({ message: 'Restaurant successfully created', restaurant });
+    res.json({ message: 'Restaurant successfully created', assetFolderResult });
   } catch (e) {
     if (e.code === 'P2002') {
       res.status(400).json({ error: 'Unique field violation. Restaurant name already exists' });
