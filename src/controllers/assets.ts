@@ -1,30 +1,33 @@
 import {v2 as cloudinary} from 'cloudinary';
+import {array} from "yup";
 
 
-export const uploadImageInAssetFolder = async () => {
+export const uploadImageInAssetFolder = async ( imageUploadDetails, foldername ) => {
     const options = {
-        public_id: "abc test image",
-        folder: "restaurant/abc",
+        folder: `restaurants/${foldername}/assets`,
         use_filename: true,
         unique_filename: false,
         overwrite: true,
     };
     try {
-        await cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg", options)
-            .then((result) => {
-                return  result;
-            });
+        const uploadImage = await cloudinary.uploader.upload(imageUploadDetails, options);
+        if (uploadImage !== undefined) {
+            return uploadImage
+        }
+        return false
     } catch (error) {
         console.error(error);
+        return error
     }
 };
 
 export const createAssetFolders = async (folderName: string) => {
     try {
-        await cloudinary.api.create_folder(`restaurant/${folderName}/assets`)
-            .then((result) => {
-                return result;
-            });
+       const assetFolder =  await cloudinary.api.create_folder(`restaurants/${folderName}/assets`);
+       if(assetFolder !== undefined) {
+           return assetFolder;
+       }
+       return false
     } catch (error) {
         console.error(error);
         return;
