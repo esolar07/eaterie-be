@@ -10,13 +10,13 @@ export const createPost = async (req, res) => {
     })
     try {
         const uploadImage =  await uploadImageInAssetFolder(postImage,restaurant.r_name )
-        // const post = await prisma.post.create({
-        //     data: {
-        //         title: postTitle,
-        //         image: postImage,
-        //         restaurantId: restaurant.id
-        //     }
-        // })
+        const post = await prisma.post.create({
+            data: {
+                title: postTitle,
+                image: postImage,
+                restaurantId: restaurant.id
+            }
+        })
         res.json(uploadImage)
     } catch ($e) {
         res.json($e)

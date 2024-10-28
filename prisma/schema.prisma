@@ -21,6 +21,8 @@ model Post {
   id           Int        @id @default(autoincrement())
   title    String     @db.VarChar(255)
   image    String     @db.VarChar(255)
+  image_public_id String? @db.VarChar(255)
+  image_secure_url String? @db.VarChar(255)
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   restaurantId Int
   published    Boolean    @default(true)
