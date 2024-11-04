@@ -5,6 +5,7 @@ import {array} from "yup";
 export const uploadImageInAssetFolder = async ( imageUploadDetails, foldername ) => {
     const options = {
         folder: `restaurants/${foldername}/assets`,
+        display_name: `tester`,
         use_filename: true,
         unique_filename: false,
         overwrite: true,
